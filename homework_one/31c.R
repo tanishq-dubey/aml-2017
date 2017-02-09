@@ -1,12 +1,12 @@
 # Optionally set working directory
-# setwd("~/Projects/classes/aml/homework_one")
+setwd("~/Projects/classes/aml/homework_one")
 
 # Open helper libaries
 library(klaR)
 library(caret)
 
 # Number of runs
-num_runs = 100
+num_runs = 10
 
 # Open the data file
 all_data <- read.csv('pima-indians-diabetes.data', header = FALSE)

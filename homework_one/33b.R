@@ -1,5 +1,5 @@
 # Optionally set working directory
-# setwd("~/Projects/classes/aml/homework_one")
+setwd("~/Projects/classes/aml/homework_one")
 
 # Open helper libaries
 library(klaR)
@@ -30,3 +30,4 @@ model <- train (cata_part, labl_part, 'nb', trControl = trainControl(method='cv'
 test_classes <- predict(model, newdata = cata[-part_idx, ])
 cm <- confusionMatrix(data = test_classes, labl[-part_idx])
 print(cm)
+cat(sprintf("Standard Deviation: %f\n", sd(model$resample$Accuracy)[1]))

@@ -27,7 +27,8 @@ cata_part <- cata[part_idx, ]
 labl_part <- labl[part_idx]
 
 # klaR training 
-model <- train (cata_part, labl_part, 'nb', trControl = trainControl(method='cv', number = num_runs))
+model <- train (cata_part, labl_part, 'nb', std=TRUE,verbose = TRUE, trControl = trainControl(method='cv', number = num_runs))
 test_classes <- predict(model, newdata = cata[-part_idx, ])
 cm <- confusionMatrix(data = test_classes, labl[-part_idx])
+cat(sprintf("Standard Deviation: %f\n", sd(model$resample$Accuracy)[1]))
 print(cm)
