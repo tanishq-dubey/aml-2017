@@ -1,29 +1,31 @@
 graphics.off()
-
 setwd("~/Projects/classes/aml/homework_four")
-dat <- read.table("brunhild.txt", header = TRUE, sep = "\t")
-par(mfrow=c(1,2))
-dat <- log(dat)
 
+dat <- read.table("brunhild.txt", header = TRUE, sep = "\t")
+dat <- log(dat)
 lm_reg <- glm(dat$Sulfate~dat$Hours)
 
-plot(dat, main = "Sulface VS Hours in Log-Log Coordinates")
-
-plot(dat, main = "Sulface VS Hours in Log-Log Coordinates")
+par(mfrow=c(1,2))
+plot(dat, main = "Sulfate VS Hours in Log-Log Coordinates")
+plot(dat, main = "Sulfate VS Hours in Log-Log Coordinates")
 abline(glm(dat$Sulfate~dat$Hours), col=c("red"))
+dev.copy(png,"79_A.png",width=10,height=6,units="in",res=150)
+dev.off()
+graphics.off()
 
-invisible(readline(prompt="Press [enter] to continue"))
-
-plot(exp(dat), main = "Sulface VS Hours in Standard Coordinates")
-
-plot(exp(dat), main = "Sulface VS Hours in Standard Coordinates")
+par(mfrow=c(1,2))
+plot(exp(dat), main = "Sulfate VS Hours in Standard Coordinates")
+plot(exp(dat), main = "Sulfate VS Hours in Standard Coordinates")
 lines(exp(dat$Hours), exp(predict(lm_reg, data.frame(x = dat$Hours))), col = c("red"))
+dev.copy(png,"79_B.png",width=10,height=6,units="in",res=150)
+dev.off()
+graphics.off()
 
-invisible(readline(prompt="Press [enter] to continue"))
-
-# Show log-log residual plot
-
+par(mfrow=c(1,2))
 plot(lm_reg$fitted.values ,lm_reg$residuals, xlab = "Fitted Values", ylab = "Residuals", main = "Residuals VS Fitted Values in Log-Log Coordinates")
 abline(glm(lm_reg$residuals~lm_reg$fitted.values), col=c("red"))
-
 plot(exp(lm_reg$fitted.values) ,exp(lm_reg$residuals), xlab = "Fitted Values", ylab = "Residuals", main = "Residuals VS Fitted Values in Standard Coordinates")
+abline(glm(exp(lm_reg$residuals)~exp(lm_reg$fitted.values)), col=c("red"))
+dev.copy(png,"79_C.png",width=10,height=6,units="in",res=150)
+dev.off()
+
