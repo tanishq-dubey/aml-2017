@@ -28,7 +28,7 @@ abline(glm(lm_reg$residuals~lm_reg$fitted.values), col=c("red"))
 p_d <- lm_reg$coefficients[['(Intercept)']] + (lm_reg$coefficients[['dat$Hours']] * dat$Hours)
 
 plot(exp(lm_reg$fitted.values) ,exp(dat$Sulfate) - exp(p_d), xlab = "Fitted Values", ylab = "Residuals", main = "Residuals VS Fitted Values in Standard Coordinates")
-abline(glm(exp(lm_reg$residuals)~exp(lm_reg$fitted.values)), col=c("red"))
-dev.copy(png,"79_C.png",width=10,height=6,units="in",res=150)
+abline(glm((exp(dat$Sulfate) - exp(p_d))~exp(lm_reg$fitted.values)), col=c("red"))
+dev.copy(png,"79_C.png",width=12,height=6,units="in",res=150)
 dev.off()
 
